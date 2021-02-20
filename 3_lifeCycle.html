@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>Vue生命周期</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+    <div id="app">
+        
+    </div>
+    <script>
+        var app = new Vue({
+           el: 'app',
+           data: {
+               a: 2
+           },
+           created: function() {
+            // 实例创建完成后调用，此阶段完成了数据的观测等，但尚未挂载，$el不可用。
+            // 常用于初始化处理一些数据时
+               console.log(this.a);     //  a
+               console.log(this.$el);   //  undefined
+           },
+           mounted: function() {
+            //   el挂载到实例上后调用，一般是第一个业务逻辑的开始
+               console.log(this.$el);   // <div></div>
+           }
+        })
+    </script>
+</body>
+</html>
