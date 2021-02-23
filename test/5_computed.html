@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>Vue 计算属性</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+    <div id="app1">
+        <!-- 计算属性可以依赖多个Vue实例的数据，只要其中任一数据变化，计算属性都会重新执行，视图也会更新  -->
+        总价：{{ prices }}
+        <br>
+
+        <!-- 计算属性利用getter来读取，还提供了setter函数手动修改计算属性的值 -->
+        <!-- 业务中少用setter而直接默认的getter方法来读取一个计算属性 -->
+        姓名：{{ fullName }}
+<br>
+    </div>
+    <div id="app2">
+        {{ reversedText }}
+    </div>
+    <script>
+        var app1 = new Vue({
+            el: '#app1',
+            data: {
+
+                // 被app2实例依赖
+                text: '123,456',
+
+                package1:[
+                    {
+                        name:'iPhone 7',
+                        price: 7199,
+                        count: 2
+                    }
+                ],
+
+                firstName: 'Jack',
+                lastName: 'Green'
+            },
+
+            computed: {
+                prices: function() {
+                    var prices = 0;
+                    var package1 = this.package1;
+                    for(var i=0; i<package1.length;i++){
+                        prices += package1[i].price*package1[i].count;
+                    }
+                    return prices;
+                },
+
+                fullName: {
+                    // getter，用于读取
+                    get: function() {
+                        return this.firstName + ' ' + this.lastName;
+                    },
+                    // setter,写入时触发
+                    set: function(newValue) {
+                        var name = newValue.split(' ');
+                        this.firstName = name[0];
+                        this.lastName = names[names.length - 1];
+                    }
+                }
+            }
+        });
+
+        var app2 = new Vue({
+            el: '#app2',
+            data: {
+                
+            },
+            computed: {
+                reversedText: function(){
+                    // 这里依赖实例app1的数据
+                    return app1.text.split(',').reverse().join(',');
+                    // split('')将字符串按某个字符或其他分隔，返回数组
+                    // reverse('')逆向排序
+                    // join('')将某数组按某个字符或其他拼接，返回字符串
+                }
+            }
+        });
+    </script>
+</body>
+</html>

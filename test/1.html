@@ -6,9 +6,26 @@
 </head>
 <body>
     <div id="app">
+        
+        <!-- v-html将HTML输出，而不是解析为成文本 -->
+        <span v-html="link"></span>
+
         <!-- v-model的值对应于创建的Vue实例的data选项中的name字段，即数据绑定 -->
         <input type="text" v-model="name" placeholder="你的名字">
+
+        <!-- {{}}最基本的文本差值，自动将双向绑定的数据实时显示出来 -->
         <h1>你好，{{ name }}</h1>
+        <!-- v-pre可跳过替换{{}}标签 -->
+        <span v-pre>{{ 该处内容不会被替换 }}</span>
+        <br>
+        <!-- {{}}除去绑定属性值，还可以使用JavaScript表达式 -->
+        {{ number / 10 }}
+        <br>
+        {{ isOk ? '确定': '取消' }}
+        <br>
+        {{ text.split(',').reverse().join(',') }}
+        <!-- 过滤器见3_lifeCycle.html -->
+
     </div>
     <script>
         var app = new Vue({
@@ -23,9 +40,16 @@
                 // 建议所有会用到的数据都预先在data内声明，防止数据散落在业务逻辑中
                 // 显示声明数据，除此之外也可以指向一个已有的变量，见2.html
                 name: '',
-                a: 2
-            }
-        })
+                a: 2,
+
+                link: '<a href="#">这是一个连接</a>',
+
+                number: 10,
+                isOk: false,
+                text: '123,456',
+            },
+
+        });
         // data对象中的所有属性都可以访问
         console.log(app.a);
         console.log(app.name);

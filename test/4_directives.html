@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>Vue 指令</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+    <div id="app">
+        <p v-if="show">显示这段文本</p>
+
+        <!-- v-bind：动态更新HTML元素上的属性 -->
+        <a v-bind:href="url">链接</a>
+        <img v-bind:src="imgUrl">
+
+        <!-- v-on：绑定事件监听器 -->
+        <button v-on:click="handleClose">点击隐藏</button>
+        <!-- 语法糖，在不影响功能的情况下，添加某种方法实现相同的效果 -->
+        <button @click="handleClose">Click</button>
+
+    </div>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                show: true,
+                 
+                url: 'https://www.csdn.net',
+                imgUrl: 'wuhuang.jpg'
+            },
+            methods: {
+                handleClose: function() {
+                    if(this.show == true){
+                        // this指向的是当前Vue实例本身
+                        this.show = false;
+                    }else{
+                        this.show = true;
+                    }
+                    
+                }
+            }
+        })
+    </script>
+</body>
+</html>
