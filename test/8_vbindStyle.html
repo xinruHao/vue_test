@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>v-bind的style绑定</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- 一般样式 -->
+        <div :style="{ 'color': color, 'fontSize': fontSize + 'px'}">文本</div>
+
+        <!-- 样式冗长，一般写在data或computed里 -->
+        <div :style="styles">文本</div>
+
+        <!-- 数组语法 -->
+    </div>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                color: 'red',
+                fontSize: 14,
+
+                styles: {
+                    color: 'red',
+                    fontSize:16+'px'
+                }
+            }
+        })
+    </script>
+</body>
+</html>
